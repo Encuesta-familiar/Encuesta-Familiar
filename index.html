@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta para la Fiesta - Opciones de Locales</title>
+    <title>Confirmación para la Fiesta de Cumpleaños</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* Fondo de estrellas */
         .stars-background {
             position: fixed;
             top: 0;
@@ -32,26 +31,9 @@
                 radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
                 radial-gradient(2px 2px at 40px 70px, #ffd700, rgba(0,0,0,0)),
                 radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #ffd700, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 160px 120px, #fff, rgba(0,0,0,0));
+                radial-gradient(2px 2px at 130px 80px, #ffd700, rgba(0,0,0,0));
             background-size: 200px 200px;
             animation: twinkle 4s infinite alternate;
-        }
-
-        .stars-background::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(2px 2px at 50px 150px, #ff4444, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 100px 200px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 150px 250px, #ffd700, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 180px 300px, #fff, rgba(0,0,0,0));
-            background-size: 250px 250px;
-            animation: twinkle 3s infinite alternate-reverse;
         }
 
         @keyframes twinkle {
@@ -59,7 +41,6 @@
             50% { opacity: 1; }
         }
 
-        /* Alfombra roja con estrellas */
         .red-carpet {
             position: fixed;
             bottom: 0;
@@ -69,39 +50,8 @@
             background: linear-gradient(to top, #8b0000, #b30000, #ff0000);
             z-index: -2;
             border-top: 5px solid #ffd700;
-            overflow: hidden;
         }
 
-        .red-carpet::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 30px 30px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 90px 70px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 150px 40px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 210px 90px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 270px 60px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 330px 110px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 390px 80px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 450px 30px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 510px 100px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 570px 50px, #ffd700 2px, transparent 3px),
-                radial-gradient(circle at 630px 120px, #ffd700 2px, transparent 3px);
-            background-size: 60px 120px;
-            opacity: 0.7;
-            animation: crawl 20s linear infinite;
-        }
-
-        @keyframes crawl {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-120px); }
-        }
-
-        /* Contenedor principal */
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -110,7 +60,6 @@
             z-index: 1;
         }
 
-        /* Header estilo Hollywood */
         .hollywood-header {
             text-align: center;
             padding: 3rem 0;
@@ -120,28 +69,6 @@
             border-radius: 20px;
             border: 3px solid #ffd700;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-        }
-
-        .hollywood-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #ffd700, #ff0000, #ffd700, transparent);
-        }
-
-        .hollywood-header::after {
-            content: '★★★';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ffd700;
-            font-size: 2rem;
-            letter-spacing: 10px;
         }
 
         .main-title {
@@ -168,13 +95,6 @@
             font-family: 'Cinzel', serif;
         }
 
-        .subtitle2 {
-            font-size: 1.2rem;
-            color: #ff6666;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-
         .theme-badge {
             display: inline-block;
             background: linear-gradient(45deg, #ff0000, #8b0000);
@@ -187,7 +107,6 @@
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
         }
 
-        /* Badge de votos en tiempo real */
         .realtime-badge {
             position: fixed;
             top: 20px;
@@ -212,11 +131,6 @@
             50% { transform: scale(1.05); }
         }
 
-        .realtime-badge i {
-            font-size: 1.3rem;
-        }
-
-        /* Tarjeta de encuesta */
         .survey-card {
             background: rgba(10, 0, 0, 0.85);
             border: 3px solid #ffd700;
@@ -255,7 +169,6 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Notas importantes */
         .important-notes {
             background: rgba(255, 215, 0, 0.1);
             border: 2px solid rgba(255, 215, 0, 0.3);
@@ -292,7 +205,6 @@
             line-height: 1.5;
         }
 
-        /* Opciones de local */
         .local-options {
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(255, 215, 0, 0.4);
@@ -302,32 +214,6 @@
             max-width: 800px;
             position: relative;
             overflow: hidden;
-        }
-
-        .local-option {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-        }
-
-        .local-option:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .local-name {
-            font-size: 1.8rem;
-            color: #ffd700;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .local-name i {
-            color: #ff6666;
         }
 
         .date-option {
@@ -380,7 +266,6 @@
             font-style: italic;
         }
 
-        /* Opciones de horario */
         .options-container {
             display: grid;
             gap: 1.5rem;
@@ -457,7 +342,6 @@
             text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
         }
 
-        /* Opciones para personas */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -502,7 +386,6 @@
             color: #fff;
         }
 
-        /* Botón de envío */
         .submit-container {
             text-align: center;
             margin: 3rem 0;
@@ -559,12 +442,6 @@
             text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
         }
 
-        .submit-note i {
-            color: #ff4444;
-            margin-right: 10px;
-        }
-
-        /* Sección de Resultados */
         .results-container {
             background: rgba(0, 0, 0, 0.9);
             border: 3px solid #ffd700;
@@ -590,10 +467,6 @@
             margin-bottom: 3rem;
             padding-bottom: 2rem;
             border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
         }
 
         .result-question {
@@ -670,7 +543,6 @@
             font-style: italic;
         }
 
-        /* Footer */
         .hollywood-footer {
             text-align: center;
             padding: 3rem 0;
@@ -696,7 +568,6 @@
             font-size: 1.1rem;
         }
 
-        /* Animaciones */
         @keyframes titleGlow {
             0% {
                 text-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
@@ -719,7 +590,6 @@
             }
         }
 
-        /* Mensaje de confirmación */
         .success-message {
             background: linear-gradient(45deg, #00aa00, #008800);
             color: #fff;
@@ -739,7 +609,6 @@
             color: #ffd700;
         }
 
-        /* Formulario de email */
         .email-input {
             width: 100%;
             padding: 1rem;
@@ -757,7 +626,6 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -797,10 +665,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .local-name {
-                font-size: 1.4rem;
-            }
-            
             .date-text {
                 font-size: 1.1rem;
             }
@@ -809,12 +673,6 @@
         @media (max-width: 480px) {
             .options-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .option-letter {
-                font-size: 1.1rem;
-                margin-right: 10px;
-                min-width: 25px;
             }
             
             .person-number {
@@ -843,7 +701,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&amp;family=Cinzel:wght@400;700;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Badge de votos en tiempo real -->
@@ -1235,7 +1093,7 @@
         // =============================================
         // CONFIGURACIÓN GOOGLE APPS SCRIPT
         // =============================================
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqwwYUmL7ZIIu5fRFlcZbLhzRaEHmY-MKMOxIriMamEGFb5nrf2JouHq-WYJWq1Mis/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5lKFd_D57F3kTqu0eAQFhSPgTf3tQ41zB7EHL750ltqaDDfjxw0T0JDj-5G0fEXjU/exec';
         // =============================================
 
         // Variables globales
@@ -1243,101 +1101,94 @@
 
         // Inicializar eventos después de que el DOM esté cargado
         document.addEventListener('DOMContentLoaded', function() {
-            // Selección de opciones de fecha
+            console.log('DOM cargado - Inicializando encuesta');
+            
+            // Configurar clics en opciones
+            setupOptionClicks();
+            
+            // Configurar botón de envío
+            document.getElementById('submitVote').addEventListener('click', guardarConfirmacion);
+            
+            // Verificar si usuario ya votó
+            if (usuarioYaVoto) {
+                disableSubmitButton();
+            }
+            
+            // Inicializar resultados
+            actualizarResultados();
+            
+            // Actualizar cada 5 segundos
+            setInterval(actualizarResultados, 5000);
+        });
+
+        // Configurar clics en todas las opciones
+        function setupOptionClicks() {
+            // Fechas
             document.querySelectorAll('.date-option').forEach(option => {
                 option.addEventListener('click', function() {
                     const question = this.dataset.question;
                     const optionValue = this.dataset.option;
                     
-                    // Remover selección previa en esta pregunta
                     document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
                         opt.classList.remove('selected');
                     });
                     
-                    // Seleccionar nueva opción
                     this.classList.add('selected');
-                    
-                    // Marcar radio button correspondiente
-                    const radioId = `${question}_${optionValue}`;
-                    const radioElement = document.getElementById(radioId);
-                    if (radioElement) {
-                        radioElement.checked = true;
-                    }
+                    document.getElementById(`${question}_${optionValue}`).checked = true;
                 });
             });
 
-            // Selección de opciones de horario
+            // Horarios
             document.querySelectorAll('.option').forEach(option => {
                 option.addEventListener('click', function() {
                     const question = this.dataset.question;
                     const optionValue = this.dataset.option;
                     
-                    // Remover selección previa en esta pregunta
                     document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
                         opt.classList.remove('selected');
                     });
                     
-                    // Seleccionar nueva opción
                     this.classList.add('selected');
-                    
-                    // Marcar radio button correspondiente
-                    const radioId = `${question}_${optionValue}`;
-                    const radioElement = document.getElementById(radioId);
-                    if (radioElement) {
-                        radioElement.checked = true;
-                    }
+                    document.getElementById(`${question}_${optionValue}`).checked = true;
                 });
             });
 
-            // Selección de opciones de personas
+            // Personas
             document.querySelectorAll('.person-option').forEach(option => {
                 option.addEventListener('click', function() {
                     const question = this.dataset.question;
                     const optionValue = this.dataset.option;
                     
-                    // Remover selección previa en esta pregunta
                     document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
                         opt.classList.remove('selected');
                     });
                     
-                    // Seleccionar nueva opción
                     this.classList.add('selected');
-                    
-                    // Marcar radio button correspondiente
-                    const radioId = `${question}_${optionValue}`;
-                    const radioElement = document.getElementById(radioId);
-                    if (radioElement) {
-                        radioElement.checked = true;
-                    }
+                    document.getElementById(`${question}_${optionValue}`).checked = true;
                 });
             });
+        }
 
-            // Configurar botón de envío
-            document.getElementById('submitVote').addEventListener('click', guardarConfirmacion);
+        // Deshabilitar botón de enviar si ya votó
+        function disableSubmitButton() {
+            const submitBtn = document.getElementById('submitVote');
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
+            submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
+            submitBtn.style.cursor = 'not-allowed';
+            submitBtn.disabled = true;
+        }
 
-            // Verificar si usuario ya votó
-            if (usuarioYaVoto) {
-                const submitBtn = document.getElementById('submitVote');
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
-                submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
-                submitBtn.style.cursor = 'not-allowed';
-                submitBtn.disabled = true;
-            }
-
-            // Inicializar resultados
-            actualizarResultados();
-            // Actualizar cada 5 segundos para mejor tiempo real
-            setInterval(actualizarResultados, 5000);
-        });
-
-        // Guardar confirmación en Google Sheets
+        // Guardar confirmación
         async function guardarConfirmacion() {
+            console.log('Intentando guardar confirmación...');
+            
             const fecha = document.querySelector('input[name="fecha"]:checked');
             const horario = document.querySelector('input[name="horario"]:checked');
             const personas = document.querySelector('input[name="personas"]:checked');
             const nombre = document.getElementById('nombre').value || 'Anónimo';
             const email = document.getElementById('email').value || '';
 
+            // Validar selecciones
             if (!fecha || !horario || !personas) {
                 alert('🎬 ¡Falta información! Por favor selecciona fecha, horario y número de personas.');
                 return false;
@@ -1348,6 +1199,7 @@
                 return false;
             }
 
+            // Preparar datos
             const datos = {
                 fecha: fecha.value,
                 horario: horario.value,
@@ -1357,78 +1209,77 @@
                 timestamp: new Date().toLocaleString('es-ES')
             };
 
+            console.log('Datos a enviar:', datos);
+
             try {
-                // Usar FormData para enviar datos (mejor compatibilidad con Google Apps Script)
-                const formData = new FormData();
+                // Crear FormData
+                const formData = new URLSearchParams();
                 formData.append('fecha', datos.fecha);
                 formData.append('horario', datos.horario);
                 formData.append('personas', datos.personas);
                 formData.append('nombre', datos.nombre);
                 formData.append('email', datos.email);
 
+                console.log('Enviando datos a:', GOOGLE_SCRIPT_URL);
+                
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
                 });
 
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Respuesta del servidor:', result);
+                console.log('Respuesta recibida:', response.status);
+                
+                const result = await response.json();
+                console.log('Resultado del servidor:', result);
+
+                if (result.success) {
+                    // Éxito
+                    usuarioYaVoto = true;
+                    localStorage.setItem('yaVoto', 'true');
                     
-                    if (result.success) {
-                        usuarioYaVoto = true;
-                        localStorage.setItem('yaVoto', 'true');
-                        
-                        // Mostrar mensaje de éxito con detalles
-                        const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
-                        document.getElementById('confirmationDetails').innerHTML = confirmationText;
-                        document.getElementById('successMessage').style.display = 'block';
-                        
-                        // Deshabilitar botón
-                        const submitBtn = document.getElementById('submitVote');
-                        submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
-                        submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
-                        submitBtn.style.cursor = 'not-allowed';
-                        submitBtn.disabled = true;
-                        
-                        // Actualizar resultados inmediatamente
-                        setTimeout(actualizarResultados, 2000);
-                        
-                        return true;
-                    } else {
-                        throw new Error(result.error || 'Error desconocido');
-                    }
+                    // Mostrar mensaje de éxito
+                    const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
+                    document.getElementById('confirmationDetails').innerHTML = confirmationText;
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Deshabilitar botón
+                    disableSubmitButton();
+                    
+                    // Actualizar resultados
+                    setTimeout(actualizarResultados, 1000);
+                    
+                    // Mostrar mensaje de éxito
+                    alert('✅ Confirmación exitosa! Tu asistencia ha sido registrada.');
+                    
+                    return true;
                 } else {
-                    throw new Error('Error en la respuesta del servidor');
+                    throw new Error(result.error || 'Error desconocido del servidor');
                 }
                 
             } catch (error) {
-                console.error('Error al enviar datos:', error);
-                alert('❌ Error al guardar la confirmación. Intenta de nuevo.');
+                console.error('Error completo:', error);
+                alert('❌ Error al guardar: ' + (error.message || 'Intenta de nuevo'));
                 return false;
             }
         }
 
-        // Obtener confirmaciones de Google Sheets
+        // Obtener confirmaciones
         async function obtenerConfirmaciones() {
             try {
+                console.log('Obteniendo confirmaciones...');
                 const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=get`, {
                     method: 'GET'
                 });
 
                 if (response.ok) {
                     const datos = await response.json();
-                    console.log('Datos recibidos de Google Sheets:', datos);
-                    
-                    // Verificar si es un array
-                    if (Array.isArray(datos)) {
-                        return datos;
-                    } else {
-                        console.warn('Los datos no son un array:', datos);
-                        return [];
-                    }
+                    console.log('Datos recibidos:', datos);
+                    return Array.isArray(datos) ? datos : [];
                 } else {
-                    console.error('Error al obtener datos:', response.status);
+                    console.error('Error HTTP:', response.status);
                     return [];
                 }
             } catch (error) {
@@ -1442,8 +1293,8 @@
             try {
                 const confirmaciones = await obtenerConfirmaciones();
                 
-                // Si no hay datos, mostrar valores por defecto
                 if (!confirmaciones || confirmaciones.length === 0) {
+                    // Valores por defecto
                     document.getElementById('currentVotesCount').textContent = '0';
                     document.getElementById('totalConfirmaciones').textContent = '0';
                     document.getElementById('totalPersonas').textContent = '0';
@@ -1454,19 +1305,13 @@
                 const stats = {
                     total: confirmaciones.length,
                     totalPersonas: 0,
-                    fechas: { 
-                        febrero: 0,
-                        marzo: 0
-                    },
+                    fechas: { febrero: 0, marzo: 0 },
                     horarios: { tarde: 0, noche: 0 },
-                    personas: { 
-                        1: 0, 2: 0, 3: 0, 4: 0, 
-                        5: 0, 6: 0, 7: 0, 8: 0 
-                    }
+                    personas: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 }
                 };
 
                 confirmaciones.forEach(conf => {
-                    // Contar personas (extraer número del string "X personas")
+                    // Contar personas
                     let numPersonas = 0;
                     if (conf.personas && typeof conf.personas === 'string') {
                         const match = conf.personas.match(/\d+/);
@@ -1476,23 +1321,17 @@
                     
                     // Contar fechas
                     if (conf.fecha) {
-                        if (conf.fecha.includes('Febrero')) {
-                            stats.fechas.febrero++;
-                        } else if (conf.fecha.includes('Marzo')) {
-                            stats.fechas.marzo++;
-                        }
+                        if (conf.fecha.includes('Febrero')) stats.fechas.febrero++;
+                        else if (conf.fecha.includes('Marzo')) stats.fechas.marzo++;
                     }
                     
                     // Contar horarios
                     if (conf.horario) {
-                        if (conf.horario.includes('Tarde')) {
-                            stats.horarios.tarde++;
-                        } else if (conf.horario.includes('Noche')) {
-                            stats.horarios.noche++;
-                        }
+                        if (conf.horario.includes('Tarde')) stats.horarios.tarde++;
+                        else if (conf.horario.includes('Noche')) stats.horarios.noche++;
                     }
                     
-                    // Contar por número de personas
+                    // Contar personas
                     if (numPersonas >= 1 && numPersonas <= 8) {
                         stats.personas[numPersonas]++;
                     }
@@ -1505,61 +1344,57 @@
 
                 // Actualizar gráficas de fechas
                 const totalFechas = stats.fechas.febrero + stats.fechas.marzo;
-                const porcentajeFebrero = totalFechas > 0 ? Math.round((stats.fechas.febrero / totalFechas) * 100) : 0;
-                const porcentajeMarzo = totalFechas > 0 ? Math.round((stats.fechas.marzo / totalFechas) * 100) : 0;
-
-                document.getElementById('result_febrero').style.width = `${porcentajeFebrero}%`;
-                document.getElementById('percent_febrero').textContent = `${porcentajeFebrero}%`;
-                document.getElementById('count_febrero').textContent = stats.fechas.febrero;
-
-                document.getElementById('result_marzo').style.width = `${porcentajeMarzo}%`;
-                document.getElementById('percent_marzo').textContent = `${porcentajeMarzo}%`;
-                document.getElementById('count_marzo').textContent = stats.fechas.marzo;
+                if (totalFechas > 0) {
+                    const pFebrero = Math.round((stats.fechas.febrero / totalFechas) * 100);
+                    const pMarzo = Math.round((stats.fechas.marzo / totalFechas) * 100);
+                    
+                    document.getElementById('result_febrero').style.width = `${pFebrero}%`;
+                    document.getElementById('percent_febrero').textContent = `${pFebrero}%`;
+                    document.getElementById('count_febrero').textContent = stats.fechas.febrero;
+                    
+                    document.getElementById('result_marzo').style.width = `${pMarzo}%`;
+                    document.getElementById('percent_marzo').textContent = `${pMarzo}%`;
+                    document.getElementById('count_marzo').textContent = stats.fechas.marzo;
+                }
 
                 // Actualizar gráficas de horarios
                 const totalHorarios = stats.horarios.tarde + stats.horarios.noche;
-                const porcentajeTarde = totalHorarios > 0 ? Math.round((stats.horarios.tarde / totalHorarios) * 100) : 0;
-                const porcentajeNoche = totalHorarios > 0 ? Math.round((stats.horarios.noche / totalHorarios) * 100) : 0;
-
-                document.getElementById('result_tarde').style.width = `${porcentajeTarde}%`;
-                document.getElementById('percent_tarde').textContent = `${porcentajeTarde}%`;
-                document.getElementById('count_tarde').textContent = stats.horarios.tarde;
-
-                document.getElementById('result_noche').style.width = `${porcentajeNoche}%`;
-                document.getElementById('percent_noche').textContent = `${porcentajeNoche}%`;
-                document.getElementById('count_noche').textContent = stats.horarios.noche;
+                if (totalHorarios > 0) {
+                    const pTarde = Math.round((stats.horarios.tarde / totalHorarios) * 100);
+                    const pNoche = Math.round((stats.horarios.noche / totalHorarios) * 100);
+                    
+                    document.getElementById('result_tarde').style.width = `${pTarde}%`;
+                    document.getElementById('percent_tarde').textContent = `${pTarde}%`;
+                    document.getElementById('count_tarde').textContent = stats.horarios.tarde;
+                    
+                    document.getElementById('result_noche').style.width = `${pNoche}%`;
+                    document.getElementById('percent_noche').textContent = `${pNoche}%`;
+                    document.getElementById('count_noche').textContent = stats.horarios.noche;
+                }
 
                 // Actualizar gráficas de personas
                 const totalPersonasConfirmaciones = confirmaciones.length;
-                
-                for (let i = 1; i <= 8; i++) {
-                    const porcentaje = totalPersonasConfirmaciones > 0 ? 
-                        Math.round((stats.personas[i] / totalPersonasConfirmaciones) * 100) : 0;
-                    
-                    const element = document.getElementById(`result_personas_${i}`);
-                    if (element) {
-                        element.style.width = `${porcentaje}%`;
+                if (totalPersonasConfirmaciones > 0) {
+                    for (let i = 1; i <= 8; i++) {
+                        const porcentaje = Math.round((stats.personas[i] / totalPersonasConfirmaciones) * 100);
+                        document.getElementById(`result_personas_${i}`).style.width = `${porcentaje}%`;
                         document.getElementById(`percent_personas_${i}`).textContent = `${porcentaje}%`;
                         document.getElementById(`count_personas_${i}`).textContent = stats.personas[i];
                     }
                 }
 
                 // Actualizar lista de últimas confirmaciones
-                const ultimasConfirmaciones = confirmaciones.slice(-5).reverse(); // Últimas 5
+                const ultimasConfirmaciones = confirmaciones.slice(-5).reverse();
                 let listaHTML = '';
                 
                 if (ultimasConfirmaciones.length > 0) {
                     ultimasConfirmaciones.forEach(conf => {
-                        const fechaHora = conf.timestamp || 'Fecha desconocida';
-                        const nombreMostrar = conf.nombre || 'Anónimo';
-                        const personasTexto = conf.personas || '0 personas';
-                        
                         listaHTML += `
                             <div style="margin-bottom: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                                <strong style="color: #ffd700;">${nombreMostrar}</strong> 
+                                <strong style="color: #ffd700;">${conf.nombre || 'Anónimo'}</strong> 
                                 confirmó para ${conf.fecha || 'Fecha no especificada'}<br>
-                                ${personasTexto} - ${conf.horario || 'Horario no especificado'}
-                                <div style="font-size: 0.8rem; color: #888;">${fechaHora}</div>
+                                ${conf.personas || '0 personas'} - ${conf.horario || 'Horario no especificado'}
+                                <div style="font-size: 0.8rem; color: #888;">${conf.timestamp || ''}</div>
                             </div>
                         `;
                     });
