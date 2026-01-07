@@ -934,9 +934,9 @@
                 </h2>
                 
                 <div class="options-container">
-                    <div class="option" data-question="2" data-option="A">
-                        <input type="radio" id="q1a" name="horario" value="Tarde (2:00 PM - 8:00 PM)" required>
-                        <label class="option-label" for="q1a">
+                    <div class="option" data-question="horario" data-option="tarde">
+                        <input type="radio" id="horario_tarde" name="horario" value="Tarde (2:00 PM - 8:00 PM)" required>
+                        <label class="option-label" for="horario_tarde">
                             <div class="option-marker"></div>
                             <span class="option-letter">A</span>
                             <span>Tarde (2:00 PM - 8:00 PM)</span>
@@ -946,9 +946,9 @@
                         </div>
                     </div>
                     
-                    <div class="option" data-question="2" data-option="B">
-                        <input type="radio" id="q1b" name="horario" value="Noche (9:00 PM - 3:00 AM)" required>
-                        <label class="option-label" for="q1b">
+                    <div class="option" data-question="horario" data-option="noche">
+                        <input type="radio" id="horario_noche" name="horario" value="Noche (9:00 PM - 3:00 AM)" required>
+                        <label class="option-label" for="horario_noche">
                             <div class="option-marker"></div>
                             <span class="option-letter">B</span>
                             <span>Noche (9:00 PM - 3:00 AM)</span>
@@ -969,65 +969,65 @@
                 </h2>
                 
                 <div class="options-grid">
-                    <div class="person-option" data-question="3" data-option="A">
-                        <input type="radio" id="q2a" name="personas" value="1 persona" required>
-                        <label for="q2a">
+                    <div class="person-option" data-question="personas" data-option="1">
+                        <input type="radio" id="personas_1" name="personas" value="1 persona" required>
+                        <label for="personas_1">
                             <div class="person-number">1</div>
                             <div class="person-text">Persona</div>
                         </label>
                     </div>
                     
-                    <div class="person-option" data-question="3" data-option="B">
-                        <input type="radio" id="q2b" name="personas" value="2 personas" required>
-                        <label for="q2b">
+                    <div class="person-option" data-question="personas" data-option="2">
+                        <input type="radio" id="personas_2" name="personas" value="2 personas" required>
+                        <label for="personas_2">
                             <div class="person-number">2</div>
                             <div class="person-text">Personas</div>
                         </label>
                     </div>
                     
-                    <div class="person-option" data-question="3" data-option="C">
-                        <input type="radio" id="q2c" name="personas" value="3 personas" required>
-                        <label for="q2c">
+                    <div class="person-option" data-question="personas" data-option="3">
+                        <input type="radio" id="personas_3" name="personas" value="3 personas" required>
+                        <label for="personas_3">
                             <div class="person-number">3</div>
                             <div class="person-text">Personas</div>
                         </label>
                     </div>
                     
-                    <div class="person-option" data-question="3" data-option="D">
-                        <input type="radio" id="q2d" name="personas" value="4 personas" required>
-                        <label for="q2d">
+                    <div class="person-option" data-question="personas" data-option="4">
+                        <input type="radio" id="personas_4" name="personas" value="4 personas" required>
+                        <label for="personas_4">
                             <div class="person-number">4</div>
                             <div class="person-text">Personas</div>
                         </label>
                     </div>
                     
-                    <div class="person-option" data-question="3" data-option="E">
-                        <input type="radio" id="q2e" name="personas" value="5 personas" required>
-                        <label for="q2e">
+                    <div class="person-option" data-question="personas" data-option="5">
+                        <input type="radio" id="personas_5" name="personas" value="5 personas" required>
+                        <label for="personas_5">
                             <div class="person-number">5</div>
                             <div class="person-text">Personas</div>
                         </label>
                     </div>
                     
-                    <div class="person-option" data-question="3" data-option="F">
-                        <input type="radio" id="q2f" name="personas" value="6 personas" required>
-                        <label for="q2f">
+                    <div class="person-option" data-question="personas" data-option="6">
+                        <input type="radio" id="personas_6" name="personas" value="6 personas" required>
+                        <label for="personas_6">
                             <div class="person-number">6</div>
                             <div class="person-text">Personas</div>
                         </label>
                     </div>
                     
-                    <div class="person-option" data-question="3" data-option="G">
-                        <input type="radio" id="q2g" name="personas" value="7 personas" required>
-                        <label for="q2g">
+                    <div class="person-option" data-question="personas" data-option="7">
+                        <input type="radio" id="personas_7" name="personas" value="7 personas" required>
+                        <label for="personas_7">
                             <div class="person-number">7</div>
                             <div class="person-text">Personas</div>
                         </label>
                     </div>
                     
-                    <div class="person-option" data-question="3" data-option="H">
-                        <input type="radio" id="q2h" name="personas" value="8 personas" required>
-                        <label for="q2h">
+                    <div class="person-option" data-question="personas" data-option="8">
+                        <input type="radio" id="personas_8" name="personas" value="8 personas" required>
+                        <label for="personas_8">
                             <div class="person-number">8</div>
                             <div class="person-text">Personas</div>
                         </label>
@@ -1120,20 +1120,20 @@
                 </div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result1a" style="width: 0%;">
-                        <span class="result-percentage" id="percent1a">0%</span>
+                    <div class="result-fill" id="result_tarde" style="width: 0%;">
+                        <span class="result-percentage" id="percent_tarde">0%</span>
                     </div>
                 </div>
                 <div class="result-date">A) Tarde (2:00 PM - 8:00 PM)</div>
-                <div class="result-votes"><span id="count1a">0</span> votos</div>
+                <div class="result-votes"><span id="count_tarde">0</span> votos</div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result1b" style="width: 0%;">
-                        <span class="result-percentage" id="percent1b">0%</span>
+                    <div class="result-fill" id="result_noche" style="width: 0%;">
+                        <span class="result-percentage" id="percent_noche">0%</span>
                     </div>
                 </div>
                 <div class="result-date">B) Noche (9:00 PM - 3:00 AM)</div>
-                <div class="result-votes"><span id="count1b">0</span> votos</div>
+                <div class="result-votes"><span id="count_noche">0</span> votos</div>
             </div>
 
             <!-- Resultado Número de personas -->
@@ -1144,68 +1144,68 @@
                 </div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result2a" style="width: 0%;">
-                        <span class="result-percentage" id="percent2a">0%</span>
+                    <div class="result-fill" id="result_personas_1" style="width: 0%;">
+                        <span class="result-percentage" id="percent_personas_1">0%</span>
                     </div>
                 </div>
                 <div class="result-date">A) 1 persona</div>
-                <div class="result-votes"><span id="count2a">0</span> confirmaciones</div>
+                <div class="result-votes"><span id="count_personas_1">0</span> confirmaciones</div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result2b" style="width: 0%;">
-                        <span class="result-percentage" id="percent2b">0%</span>
+                    <div class="result-fill" id="result_personas_2" style="width: 0%;">
+                        <span class="result-percentage" id="percent_personas_2">0%</span>
                     </div>
                 </div>
                 <div class="result-date">B) 2 personas</div>
-                <div class="result-votes"><span id="count2b">0</span> confirmaciones</div>
+                <div class="result-votes"><span id="count_personas_2">0</span> confirmaciones</div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result2c" style="width: 0%;">
-                        <span class="result-percentage" id="percent2c">0%</span>
+                    <div class="result-fill" id="result_personas_3" style="width: 0%;">
+                        <span class="result-percentage" id="percent_personas_3">0%</span>
                     </div>
                 </div>
                 <div class="result-date">C) 3 personas</div>
-                <div class="result-votes"><span id="count2c">0</span> confirmaciones</div>
+                <div class="result-votes"><span id="count_personas_3">0</span> confirmaciones</div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result2d" style="width: 0%;">
-                        <span class="result-percentage" id="percent2d">0%</span>
+                    <div class="result-fill" id="result_personas_4" style="width: 0%;">
+                        <span class="result-percentage" id="percent_personas_4">0%</span>
                     </div>
                 </div>
                 <div class="result-date">D) 4 personas</div>
-                <div class="result-votes"><span id="count2d">0</span> confirmaciones</div>
+                <div class="result-votes"><span id="count_personas_4">0</span> confirmaciones</div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result2e" style="width: 0%;">
-                        <span class="result-percentage" id="percent2e">0%</span>
+                    <div class="result-fill" id="result_personas_5" style="width: 0%;">
+                        <span class="result-percentage" id="percent_personas_5">0%</span>
                     </div>
                 </div>
                 <div class="result-date">E) 5 personas</div>
-                <div class="result-votes"><span id="count2e">0</span> confirmaciones</div>
+                <div class="result-votes"><span id="count_personas_5">0</span> confirmaciones</div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result2f" style="width: 0%;">
-                        <span class="result-percentage" id="percent2f">0%</span>
+                    <div class="result-fill" id="result_personas_6" style="width: 0%;">
+                        <span class="result-percentage" id="percent_personas_6">0%</span>
                     </div>
                 </div>
                 <div class="result-date">F) 6 personas</div>
-                <div class="result-votes"><span id="count2f">0</span> confirmaciones</div>
+                <div class="result-votes"><span id="count_personas_6">0</span> confirmaciones</div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result2g" style="width: 0%;">
-                        <span class="result-percentage" id="percent2g">0%</span>
+                    <div class="result-fill" id="result_personas_7" style="width: 0%;">
+                        <span class="result-percentage" id="percent_personas_7">0%</span>
                     </div>
                 </div>
                 <div class="result-date">G) 7 personas</div>
-                <div class="result-votes"><span id="count2g">0</span> confirmaciones</div>
+                <div class="result-votes"><span id="count_personas_7">0</span> confirmaciones</div>
                 
                 <div class="result-bar">
-                    <div class="result-fill" id="result2h" style="width: 0%;">
-                        <span class="result-percentage" id="percent2h">0%</span>
+                    <div class="result-fill" id="result_personas_8" style="width: 0%;">
+                        <span class="result-percentage" id="percent_personas_8">0%</span>
                     </div>
                 </div>
                 <div class="result-date">H) 8 personas</div>
-                <div class="result-votes"><span id="count2h">0</span> confirmaciones</div>
+                <div class="result-votes"><span id="count_personas_8">0</span> confirmaciones</div>
             </div>
 
             <!-- Lista de confirmaciones -->
@@ -1241,76 +1241,123 @@
         // Variables globales
         let usuarioYaVoto = localStorage.getItem('yaVoto') === 'true';
 
-        // Selección de opciones de fecha
-        document.querySelectorAll('.date-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const question = this.dataset.question;
-                const optionValue = this.dataset.option;
-                
-                // Remover selección previa en esta pregunta
-                document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
-                    opt.classList.remove('selected');
+        // Inicializar eventos después de que el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Selección de opciones de fecha
+            document.querySelectorAll('.date-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.dataset.question;
+                    const optionValue = this.dataset.option;
+                    
+                    // Remover selección previa en esta pregunta
+                    document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Seleccionar nueva opción
+                    this.classList.add('selected');
+                    
+                    // Marcar radio button correspondiente
+                    const radioId = `${question}_${optionValue}`;
+                    const radioElement = document.getElementById(radioId);
+                    if (radioElement) {
+                        radioElement.checked = true;
+                        console.log(`Fecha seleccionada: ${optionValue}, ID: ${radioId}`);
+                    }
                 });
-                
-                // Seleccionar nueva opción
-                this.classList.add('selected');
-                
-                // Marcar radio button correspondiente
-                const radioId = `fecha_${optionValue}`;
-                document.getElementById(radioId).checked = true;
             });
+
+            // Selección de opciones de horario
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.dataset.question;
+                    const optionValue = this.dataset.option;
+                    
+                    // Remover selección previa en esta pregunta
+                    document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Seleccionar nueva opción
+                    this.classList.add('selected');
+                    
+                    // Marcar radio button correspondiente
+                    const radioId = `${question}_${optionValue}`;
+                    const radioElement = document.getElementById(radioId);
+                    if (radioElement) {
+                        radioElement.checked = true;
+                        console.log(`Horario seleccionado: ${optionValue}, ID: ${radioId}`);
+                    }
+                });
+            });
+
+            // Selección de opciones de personas
+            document.querySelectorAll('.person-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.dataset.question;
+                    const optionValue = this.dataset.option;
+                    
+                    // Remover selección previa en esta pregunta
+                    document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Seleccionar nueva opción
+                    this.classList.add('selected');
+                    
+                    // Marcar radio button correspondiente
+                    const radioId = `${question}_${optionValue}`;
+                    const radioElement = document.getElementById(radioId);
+                    if (radioElement) {
+                        radioElement.checked = true;
+                        console.log(`Personas seleccionadas: ${optionValue}, ID: ${radioId}`);
+                    }
+                });
+            });
+
+            // Configurar botón de envío
+            document.getElementById('submitVote').addEventListener('click', guardarConfirmacion);
+
+            // Verificar si usuario ya votó
+            if (usuarioYaVoto) {
+                const submitBtn = document.getElementById('submitVote');
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
+                submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
+                submitBtn.style.cursor = 'not-allowed';
+                submitBtn.disabled = true;
+            }
+
+            // Inicializar resultados
+            actualizarResultados();
+            setInterval(actualizarResultados, 30000); // 30 segundos
         });
 
-        // Selección de opciones de horario
-        document.querySelectorAll('.option').forEach(option => {
-            option.addEventListener('click', function() {
-                const question = this.dataset.question;
-                const optionValue = this.dataset.option;
-                
-                // Remover selección previa en esta pregunta
-                document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                
-                // Seleccionar nueva opción
-                this.classList.add('selected');
-                
-                // Marcar radio button correspondiente
-                const radioId = `q${question}${optionValue.toLowerCase()}`;
-                document.getElementById(radioId).checked = true;
-            });
-        });
-
-        // Selección de opciones de personas
-        document.querySelectorAll('.person-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const question = this.dataset.question;
-                const optionValue = this.dataset.option;
-                
-                // Remover selección previa en esta pregunta
-                document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                
-                // Seleccionar nueva opción
-                this.classList.add('selected');
-                
-                // Marcar radio button correspondiente
-                const radioId = `q${question}${optionValue.toLowerCase()}`;
-                document.getElementById(radioId).checked = true;
-            });
-        });
-
-        // Guardar confirmación en Google Sheets
-        async function guardarConfirmacion() {
+        // Función para depurar - mostrar qué opciones están seleccionadas
+        function mostrarSeleccionActual() {
             const fecha = document.querySelector('input[name="fecha"]:checked');
             const horario = document.querySelector('input[name="horario"]:checked');
             const personas = document.querySelector('input[name="personas"]:checked');
+            
+            console.log('Fecha seleccionada:', fecha ? fecha.value : 'Ninguna');
+            console.log('Horario seleccionado:', horario ? horario.value : 'Ninguno');
+            console.log('Personas seleccionadas:', personas ? personas.value : 'Ninguna');
+            
+            return { fecha, horario, personas };
+        }
+
+        // Guardar confirmación en Google Sheets
+        async function guardarConfirmacion() {
+            console.log('Intentando guardar confirmación...');
+            
+            // Verificar selecciones actuales
+            const { fecha, horario, personas } = mostrarSeleccionActual();
+            
             const nombre = document.getElementById('nombre').value || 'Anónimo';
             const email = document.getElementById('email').value || '';
 
             if (!fecha || !horario || !personas) {
                 alert('🎬 ¡Falta información! Por favor selecciona fecha, horario y número de personas.');
+                console.log('Error: Faltan datos. Fecha:', !!fecha, 'Horario:', !!horario, 'Personas:', !!personas);
                 return false;
             }
 
@@ -1329,41 +1376,86 @@
                 accion: 'guardar'
             };
 
+            console.log('Datos a enviar:', datos);
+
             try {
+                // Primero intentar con CORS si es posible
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(datos)
                 });
 
-                // Con no-cors no podemos ver la respuesta, así que asumimos éxito
-                usuarioYaVoto = true;
-                localStorage.setItem('yaVoto', 'true');
-                
-                // Mostrar mensaje de éxito con detalles
-                const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
-                document.getElementById('confirmationDetails').innerHTML = confirmationText;
-                document.getElementById('successMessage').style.display = 'block';
-                
-                // Deshabilitar botón
-                const submitBtn = document.getElementById('submitVote');
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
-                submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
-                submitBtn.style.cursor = 'not-allowed';
-                submitBtn.disabled = true;
-                
-                // Actualizar resultados
-                setTimeout(actualizarResultados, 1000);
-                
-                return true;
+                if (response.ok) {
+                    usuarioYaVoto = true;
+                    localStorage.setItem('yaVoto', 'true');
+                    
+                    // Mostrar mensaje de éxito con detalles
+                    const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
+                    document.getElementById('confirmationDetails').innerHTML = confirmationText;
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Deshabilitar botón
+                    const submitBtn = document.getElementById('submitVote');
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
+                    submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
+                    submitBtn.style.cursor = 'not-allowed';
+                    submitBtn.disabled = true;
+                    
+                    console.log('Confirmación guardada exitosamente');
+                    
+                    // Actualizar resultados después de un breve retraso
+                    setTimeout(actualizarResultados, 2000);
+                    
+                    return true;
+                } else {
+                    throw new Error('Error en la respuesta del servidor');
+                }
                 
             } catch (error) {
-                console.error('Error:', error);
-                alert('❌ Error al guardar la confirmación. Intenta de nuevo.');
-                return false;
+                console.error('Error al enviar datos:', error);
+                
+                // Si falla con CORS, intentar con no-cors
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(datos)
+                    });
+
+                    // Con no-cors no podemos ver la respuesta, así que asumimos éxito
+                    usuarioYaVoto = true;
+                    localStorage.setItem('yaVoto', 'true');
+                    
+                    // Mostrar mensaje de éxito con detalles
+                    const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
+                    document.getElementById('confirmationDetails').innerHTML = confirmationText;
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Deshabilitar botón
+                    const submitBtn = document.getElementById('submitVote');
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
+                    submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
+                    submitBtn.style.cursor = 'not-allowed';
+                    submitBtn.disabled = true;
+                    
+                    console.log('Confirmación enviada (modo no-cors)');
+                    
+                    // Actualizar resultados
+                    setTimeout(actualizarResultados, 2000);
+                    
+                    return true;
+                    
+                } catch (noCorsError) {
+                    console.error('Error incluso con no-cors:', noCorsError);
+                    alert('❌ Error al guardar la confirmación. Intenta de nuevo o verifica tu conexión.');
+                    return false;
+                }
             }
         }
 
@@ -1371,18 +1463,19 @@
         async function obtenerConfirmaciones() {
             try {
                 const response = await fetch(`${GOOGLE_SCRIPT_URL}?accion=obtener`, {
-                    method: 'GET',
-                    mode: 'cors'
+                    method: 'GET'
                 });
 
                 if (response.ok) {
                     const datos = await response.json();
+                    console.log('Datos obtenidos:', datos.length, 'registros');
                     return datos;
                 } else {
+                    console.log('Respuesta no OK:', response.status);
                     return [];
                 }
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error al obtener confirmaciones:', error);
                 return [];
             }
         }
@@ -1391,6 +1484,7 @@
         async function actualizarResultados() {
             try {
                 const confirmaciones = await obtenerConfirmaciones();
+                console.log('Actualizando resultados con', confirmaciones.length, 'confirmaciones');
                 
                 // Calcular estadísticas
                 const stats = {
@@ -1409,7 +1503,7 @@
 
                 confirmaciones.forEach(conf => {
                     // Contar personas
-                    const numPersonas = parseInt(conf.personas);
+                    const numPersonas = conf.personas ? parseInt(conf.personas) : 0;
                     stats.totalPersonas += numPersonas;
                     
                     // Contar fechas
@@ -1422,10 +1516,12 @@
                     }
                     
                     // Contar horarios
-                    if (conf.horario && conf.horario.includes('Tarde')) {
-                        stats.horarios.tarde++;
-                    } else if (conf.horario) {
-                        stats.horarios.noche++;
+                    if (conf.horario) {
+                        if (conf.horario.includes('Tarde')) {
+                            stats.horarios.tarde++;
+                        } else if (conf.horario.includes('Noche')) {
+                            stats.horarios.noche++;
+                        }
                     }
                     
                     // Contar por número de personas
@@ -1433,6 +1529,8 @@
                         stats.personas[numPersonas]++;
                     }
                 });
+
+                console.log('Estadísticas calculadas:', stats);
 
                 // Actualizar contadores principales
                 document.getElementById('currentVotesCount').textContent = stats.total;
@@ -1467,25 +1565,24 @@
                 const porcentajeTarde = totalHorarios > 0 ? Math.round((stats.horarios.tarde / totalHorarios) * 100) : 0;
                 const porcentajeNoche = totalHorarios > 0 ? Math.round((stats.horarios.noche / totalHorarios) * 100) : 0;
 
-                document.getElementById('result1a').style.width = `${porcentajeTarde}%`;
-                document.getElementById('percent1a').textContent = `${porcentajeTarde}%`;
-                document.getElementById('count1a').textContent = stats.horarios.tarde;
+                document.getElementById('result_tarde').style.width = `${porcentajeTarde}%`;
+                document.getElementById('percent_tarde').textContent = `${porcentajeTarde}%`;
+                document.getElementById('count_tarde').textContent = stats.horarios.tarde;
 
-                document.getElementById('result1b').style.width = `${porcentajeNoche}%`;
-                document.getElementById('percent1b').textContent = `${porcentajeNoche}%`;
-                document.getElementById('count1b').textContent = stats.horarios.noche;
+                document.getElementById('result_noche').style.width = `${porcentajeNoche}%`;
+                document.getElementById('percent_noche').textContent = `${porcentajeNoche}%`;
+                document.getElementById('count_noche').textContent = stats.horarios.noche;
 
                 // Actualizar gráficas de personas
                 const totalPersonasConfirmaciones = confirmaciones.length;
-                const letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
                 
                 for (let i = 1; i <= 8; i++) {
                     const porcentaje = totalPersonasConfirmaciones > 0 ? 
                         Math.round((stats.personas[i] / totalPersonasConfirmaciones) * 100) : 0;
                     
-                    document.getElementById(`result2${letras[i-1]}`).style.width = `${porcentaje}%`;
-                    document.getElementById(`percent2${letras[i-1]}`).textContent = `${porcentaje}%`;
-                    document.getElementById(`count2${letras[i-1]}`).textContent = stats.personas[i];
+                    document.getElementById(`result_personas_${i}`).style.width = `${porcentaje}%`;
+                    document.getElementById(`percent_personas_${i}`).textContent = `${porcentaje}%`;
+                    document.getElementById(`count_personas_${i}`).textContent = stats.personas[i];
                 }
 
                 // Actualizar lista de últimas confirmaciones
@@ -1495,12 +1592,13 @@
                 if (ultimasConfirmaciones.length > 0) {
                     ultimasConfirmaciones.forEach(conf => {
                         const fechaHora = conf.timestamp || 'Fecha desconocida';
+                        const nombreMostrar = conf.nombre || 'Anónimo';
                         
                         listaHTML += `
                             <div style="margin-bottom: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                                <strong style="color: #ffd700;">${conf.nombre}</strong> 
-                                confirmó para ${conf.fecha}<br>
-                                ${conf.personas.toLowerCase()} - ${conf.horario}
+                                <strong style="color: #ffd700;">${nombreMostrar}</strong> 
+                                confirmó para ${conf.fecha || 'Fecha no especificada'}<br>
+                                ${conf.personas || '0 personas'} - ${conf.horario || 'Horario no especificado'}
                                 <div style="font-size: 0.8rem; color: #888;">${fechaHora}</div>
                             </div>
                         `;
@@ -1515,24 +1613,6 @@
                 console.error('Error al actualizar resultados:', error);
             }
         }
-
-        // Configurar botón de envío
-        document.getElementById('submitVote').addEventListener('click', guardarConfirmacion);
-
-        // Verificar si usuario ya votó
-        if (usuarioYaVoto) {
-            const submitBtn = document.getElementById('submitVote');
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
-            submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
-            submitBtn.style.cursor = 'not-allowed';
-            submitBtn.disabled = true;
-        }
-
-        // Inicializar y actualizar cada 30 segundos
-        document.addEventListener('DOMContentLoaded', function() {
-            actualizarResultados();
-            setInterval(actualizarResultados, 30000); // 30 segundos
-        });
     </script>
 </body>
 </html>
