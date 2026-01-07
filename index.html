@@ -1365,7 +1365,6 @@
                 formData.append('personas', datos.personas);
                 formData.append('nombre', datos.nombre);
                 formData.append('email', datos.email);
-                formData.append('timestamp', datos.timestamp);
 
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
@@ -1373,25 +1372,32 @@
                 });
 
                 if (response.ok) {
-                    usuarioYaVoto = true;
-                    localStorage.setItem('yaVoto', 'true');
+                    const result = await response.json();
+                    console.log('Respuesta del servidor:', result);
                     
-                    // Mostrar mensaje de éxito con detalles
-                    const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
-                    document.getElementById('confirmationDetails').innerHTML = confirmationText;
-                    document.getElementById('successMessage').style.display = 'block';
-                    
-                    // Deshabilitar botón
-                    const submitBtn = document.getElementById('submitVote');
-                    submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
-                    submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
-                    submitBtn.style.cursor = 'not-allowed';
-                    submitBtn.disabled = true;
-                    
-                    // Actualizar resultados inmediatamente
-                    setTimeout(actualizarResultados, 1000);
-                    
-                    return true;
+                    if (result.success) {
+                        usuarioYaVoto = true;
+                        localStorage.setItem('yaVoto', 'true');
+                        
+                        // Mostrar mensaje de éxito con detalles
+                        const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
+                        document.getElementById('confirmationDetails').innerHTML = confirmationText;
+                        document.getElementById('successMessage').style.display = 'block';
+                        
+                        // Deshabilitar botón
+                        const submitBtn = document.getElementById('submitVote');
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
+                        submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
+                        submitBtn.style.cursor = 'not-allowed';
+                        submitBtn.disabled = true;
+                        
+                        // Actualizar resultados inmediatamente
+                        setTimeout(actualizarResultados, 2000);
+                        
+                        return true;
+                    } else {
+                        throw new Error(result.error || 'Error desconocido');
+                    }
                 } else {
                     throw new Error('Error en la respuesta del servidor');
                 }
@@ -1412,7 +1418,15 @@
 
                 if (response.ok) {
                     const datos = await response.json();
-                    return datos;
+                    console.log('Datos recibidos de Google Sheets:', datos);
+                    
+                    // Verificar si es un array
+                    if (Array.isArray(datos)) {
+                        return datos;
+                    } else {
+                        console.warn('Los datos no son un array:', datos);
+                        return [];
+                    }
                 } else {
                     console.error('Error al obtener datos:', response.status);
                     return [];
@@ -1452,8 +1466,12 @@
                 };
 
                 confirmaciones.forEach(conf => {
-                    // Contar personas
-                    const numPersonas = conf.personas ? parseInt(conf.personas) : 0;
+                    // Contar personas (extraer número del string "X personas")
+                    let numPersonas = 0;
+                    if (conf.personas && typeof conf.personas === 'string') {
+                        const match = conf.personas.match(/\d+/);
+                        numPersonas = match ? parseInt(match[0]) : 0;
+                    }
                     stats.totalPersonas += numPersonas;
                     
                     // Contar fechas
@@ -1527,19 +1545,20 @@
                 }
 
                 // Actualizar lista de últimas confirmaciones
-                const ultimasConfirmaciones = confirmaciones.slice(0, 5);
+                const ultimasConfirmaciones = confirmaciones.slice(-5).reverse(); // Últimas 5
                 let listaHTML = '';
                 
                 if (ultimasConfirmaciones.length > 0) {
                     ultimasConfirmaciones.forEach(conf => {
                         const fechaHora = conf.timestamp || 'Fecha desconocida';
                         const nombreMostrar = conf.nombre || 'Anónimo';
+                        const personasTexto = conf.personas || '0 personas';
                         
                         listaHTML += `
                             <div style="margin-bottom: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
                                 <strong style="color: #ffd700;">${nombreMostrar}</strong> 
                                 confirmó para ${conf.fecha || 'Fecha no especificada'}<br>
-                                ${conf.personas || '0 personas'} - ${conf.horario || 'Horario no especificado'}
+                                ${personasTexto} - ${conf.horario || 'Horario no especificado'}
                                 <div style="font-size: 0.8rem; color: #888;">${fechaHora}</div>
                             </div>
                         `;
