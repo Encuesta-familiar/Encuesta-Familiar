@@ -1178,7 +1178,7 @@
             submitBtn.disabled = true;
         }
 
-        // Guardar confirmación - MÉTODO SIMPLIFICADO
+        // Guardar confirmación - MÉTODO FUNCIONAL
         async function guardarConfirmacion() {
             console.log('Intentando guardar confirmación...');
             
@@ -1205,8 +1205,7 @@
                 horario: horario.value,
                 personas: personas.value,
                 nombre: nombre,
-                email: email,
-                timestamp: new Date().toLocaleString('es-ES')
+                email: email
             };
 
             console.log('Datos a enviar:', datos);
@@ -1223,56 +1222,86 @@
                 const url = `${GOOGLE_SCRIPT_URL}?${params.toString()}`;
                 console.log('URL de envío:', url);
                 
-                // Enviar datos usando GET (más simple)
+                // Enviar datos usando GET
                 const response = await fetch(url, {
                     method: 'GET',
-                    mode: 'no-cors'  // Esto evita problemas de CORS
+                    redirect: 'follow'
                 });
 
-                console.log('Respuesta recibida (status no disponible por no-cors)');
+                console.log('Respuesta recibida:', response);
                 
-                // Como usamos no-cors, no podemos verificar la respuesta directamente
-                // Pero asumimos que se guardó si no hay error
+                // Obtener el texto de la respuesta
+                const responseText = await response.text();
+                console.log('Texto de respuesta:', responseText);
                 
-                // Éxito - Actualizar interfaz
-                usuarioYaVoto = true;
-                localStorage.setItem('yaVoto', 'true');
+                // Intentar parsear como JSON
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (e) {
+                    console.warn('No se pudo parsear como JSON:', e);
+                    result = { success: true }; // Asumir éxito si no hay JSON
+                }
                 
-                // Mostrar mensaje de éxito
-                const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
-                document.getElementById('confirmationDetails').innerHTML = confirmationText;
-                document.getElementById('successMessage').style.display = 'block';
-                
-                // Deshabilitar botón
-                disableSubmitButton();
-                
-                // Actualizar resultados después de 2 segundos
-                setTimeout(actualizarResultados, 2000);
-                
-                // Mostrar alerta de éxito
-                alert('✅ ¡Confirmación exitosa! Tu asistencia ha sido registrada.');
-                
-                return true;
+                if (result && result.success !== false) {
+                    // Éxito
+                    usuarioYaVoto = true;
+                    localStorage.setItem('yaVoto', 'true');
+                    
+                    // Mostrar mensaje de éxito
+                    const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
+                    document.getElementById('confirmationDetails').innerHTML = confirmationText;
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Deshabilitar botón
+                    disableSubmitButton();
+                    
+                    // Actualizar resultados inmediatamente
+                    setTimeout(() => {
+                        actualizarResultados();
+                        // Forzar actualización visual
+                        document.getElementById('currentVotesCount').textContent = 
+                            parseInt(document.getElementById('currentVotesCount').textContent) + 1;
+                    }, 1000);
+                    
+                    // Mostrar alerta de éxito
+                    alert('✅ ¡Confirmación exitosa! Tu asistencia ha sido registrada.');
+                    
+                    return true;
+                } else {
+                    throw new Error(result?.error || 'Error desconocido del servidor');
+                }
                 
             } catch (error) {
                 console.error('Error completo:', error);
-                alert('❌ Error de conexión. Por favor, intenta de nuevo en un momento.');
+                alert('❌ Error: ' + (error.message || 'Intenta de nuevo en un momento.'));
                 return false;
             }
         }
 
-        // Obtener confirmaciones
+        // Obtener confirmaciones - FUNCIÓN MEJORADA
         async function obtenerConfirmaciones() {
             try {
                 console.log('Obteniendo confirmaciones...');
-                const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=get`, {
-                    method: 'GET'
+                const timestamp = new Date().getTime(); // Para evitar caché
+                const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=get&_=${timestamp}`, {
+                    method: 'GET',
+                    cache: 'no-cache'
                 });
 
                 if (response.ok) {
-                    const datos = await response.json();
-                    console.log('Datos recibidos:', datos);
-                    return Array.isArray(datos) ? datos : [];
+                    const result = await response.json();
+                    console.log('Resultado completo:', result);
+                    
+                    // El resultado ahora viene como objeto con {data: [], total: X}
+                    if (result && result.data && Array.isArray(result.data)) {
+                        return result.data;
+                    } else if (Array.isArray(result)) {
+                        return result; // Compatibilidad con versión anterior
+                    } else {
+                        console.warn('Formato de datos inesperado:', result);
+                        return [];
+                    }
                 } else {
                     console.error('Error HTTP:', response.status);
                     return [];
@@ -1287,12 +1316,14 @@
         async function actualizarResultados() {
             try {
                 const confirmaciones = await obtenerConfirmaciones();
+                console.log('Confirmaciones obtenidas:', confirmaciones);
                 
                 if (!confirmaciones || confirmaciones.length === 0) {
                     // Valores por defecto
                     document.getElementById('currentVotesCount').textContent = '0';
                     document.getElementById('totalConfirmaciones').textContent = '0';
                     document.getElementById('totalPersonas').textContent = '0';
+                    document.getElementById('listaConfirmaciones').innerHTML = '<p style="color: #888;">Aún no hay confirmaciones</p>';
                     return;
                 }
                 
@@ -1331,6 +1362,8 @@
                         stats.personas[numPersonas]++;
                     }
                 });
+
+                console.log('Estadísticas calculadas:', stats);
 
                 // Actualizar contadores principales
                 document.getElementById('currentVotesCount').textContent = stats.total;
@@ -1372,9 +1405,15 @@
                 if (totalPersonasConfirmaciones > 0) {
                     for (let i = 1; i <= 8; i++) {
                         const porcentaje = Math.round((stats.personas[i] / totalPersonasConfirmaciones) * 100);
-                        document.getElementById(`result_personas_${i}`).style.width = `${porcentaje}%`;
-                        document.getElementById(`percent_personas_${i}`).textContent = `${porcentaje}%`;
-                        document.getElementById(`count_personas_${i}`).textContent = stats.personas[i];
+                        const fillElement = document.getElementById(`result_personas_${i}`);
+                        const percentElement = document.getElementById(`percent_personas_${i}`);
+                        const countElement = document.getElementById(`count_personas_${i}`);
+                        
+                        if (fillElement && percentElement && countElement) {
+                            fillElement.style.width = `${porcentaje}%`;
+                            percentElement.textContent = `${porcentaje}%`;
+                            countElement.textContent = stats.personas[i];
+                        }
                     }
                 }
 
@@ -1384,12 +1423,18 @@
                 
                 if (ultimasConfirmaciones.length > 0) {
                     ultimasConfirmaciones.forEach(conf => {
+                        const nombreMostrar = conf.nombre || 'Anónimo';
+                        const fechaMostrar = conf.fecha || 'Fecha no especificada';
+                        const personasMostrar = conf.personas || '0 personas';
+                        const horarioMostrar = conf.horario || 'Horario no especificado';
+                        const timestampMostrar = conf.timestamp || '';
+                        
                         listaHTML += `
                             <div style="margin-bottom: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                                <strong style="color: #ffd700;">${conf.nombre || 'Anónimo'}</strong> 
-                                confirmó para ${conf.fecha || 'Fecha no especificada'}<br>
-                                ${conf.personas || '0 personas'} - ${conf.horario || 'Horario no especificado'}
-                                <div style="font-size: 0.8rem; color: #888;">${conf.timestamp || ''}</div>
+                                <strong style="color: #ffd700;">${nombreMostrar}</strong> 
+                                confirmó para ${fechaMostrar}<br>
+                                ${personasMostrar} - ${horarioMostrar}
+                                <div style="font-size: 0.8rem; color: #888;">${timestampMostrar}</div>
                             </div>
                         `;
                     });
@@ -1403,6 +1448,37 @@
                 console.error('Error al actualizar resultados:', error);
             }
         }
+
+        // Función para limpiar caché (solo para pruebas)
+        function limpiarCache() {
+            localStorage.removeItem('yaVoto');
+            usuarioYaVoto = false;
+            const submitBtn = document.getElementById('submitVote');
+            submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> CONFIRMAR MI ASISTENCIA';
+            submitBtn.style.background = 'linear-gradient(45deg, #ff0000, #8b0000, #ff0000)';
+            submitBtn.style.cursor = 'pointer';
+            submitBtn.disabled = false;
+            document.getElementById('successMessage').style.display = 'none';
+            alert('✅ Caché limpiado. Puedes confirmar de nuevo.');
+        }
+
+        // Agregar botón de limpieza para pruebas (opcional)
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const clearBtn = document.createElement('button');
+        //     clearBtn.innerHTML = '🔧 Limpiar Caché (Pruebas)';
+        //     clearBtn.style.position = 'fixed';
+        //     clearBtn.style.bottom = '10px';
+        //     clearBtn.style.left = '10px';
+        //     clearBtn.style.zIndex = '9999';
+        //     clearBtn.style.padding = '10px';
+        //     clearBtn.style.background = '#333';
+        //     clearBtn.style.color = '#fff';
+        //     clearBtn.style.border = 'none';
+        //     clearBtn.style.borderRadius = '5px';
+        //     clearBtn.style.cursor = 'pointer';
+        //     clearBtn.onclick = limpiarCache;
+        //     document.body.appendChild(clearBtn);
+        // });
     </script>
 </body>
 </html>
