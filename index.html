@@ -1262,7 +1262,6 @@
                     const radioElement = document.getElementById(radioId);
                     if (radioElement) {
                         radioElement.checked = true;
-                        console.log(`Fecha seleccionada: ${optionValue}, ID: ${radioId}`);
                     }
                 });
             });
@@ -1286,7 +1285,6 @@
                     const radioElement = document.getElementById(radioId);
                     if (radioElement) {
                         radioElement.checked = true;
-                        console.log(`Horario seleccionado: ${optionValue}, ID: ${radioId}`);
                     }
                 });
             });
@@ -1310,7 +1308,6 @@
                     const radioElement = document.getElementById(radioId);
                     if (radioElement) {
                         radioElement.checked = true;
-                        console.log(`Personas seleccionadas: ${optionValue}, ID: ${radioId}`);
                     }
                 });
             });
@@ -1329,35 +1326,20 @@
 
             // Inicializar resultados
             actualizarResultados();
-            setInterval(actualizarResultados, 30000); // 30 segundos
+            // Actualizar cada 5 segundos para mejor tiempo real
+            setInterval(actualizarResultados, 5000);
         });
-
-        // Función para depurar - mostrar qué opciones están seleccionadas
-        function mostrarSeleccionActual() {
-            const fecha = document.querySelector('input[name="fecha"]:checked');
-            const horario = document.querySelector('input[name="horario"]:checked');
-            const personas = document.querySelector('input[name="personas"]:checked');
-            
-            console.log('Fecha seleccionada:', fecha ? fecha.value : 'Ninguna');
-            console.log('Horario seleccionado:', horario ? horario.value : 'Ninguno');
-            console.log('Personas seleccionadas:', personas ? personas.value : 'Ninguna');
-            
-            return { fecha, horario, personas };
-        }
 
         // Guardar confirmación en Google Sheets
         async function guardarConfirmacion() {
-            console.log('Intentando guardar confirmación...');
-            
-            // Verificar selecciones actuales
-            const { fecha, horario, personas } = mostrarSeleccionActual();
-            
+            const fecha = document.querySelector('input[name="fecha"]:checked');
+            const horario = document.querySelector('input[name="horario"]:checked');
+            const personas = document.querySelector('input[name="personas"]:checked');
             const nombre = document.getElementById('nombre').value || 'Anónimo';
             const email = document.getElementById('email').value || '';
 
             if (!fecha || !horario || !personas) {
                 alert('🎬 ¡Falta información! Por favor selecciona fecha, horario y número de personas.');
-                console.log('Error: Faltan datos. Fecha:', !!fecha, 'Horario:', !!horario, 'Personas:', !!personas);
                 return false;
             }
 
@@ -1372,20 +1354,22 @@
                 personas: personas.value,
                 nombre: nombre,
                 email: email,
-                timestamp: new Date().toLocaleString('es-ES'),
-                accion: 'guardar'
+                timestamp: new Date().toLocaleString('es-ES')
             };
 
-            console.log('Datos a enviar:', datos);
-
             try {
-                // Primero intentar con CORS si es posible
+                // Usar FormData para enviar datos (mejor compatibilidad con Google Apps Script)
+                const formData = new FormData();
+                formData.append('fecha', datos.fecha);
+                formData.append('horario', datos.horario);
+                formData.append('personas', datos.personas);
+                formData.append('nombre', datos.nombre);
+                formData.append('email', datos.email);
+                formData.append('timestamp', datos.timestamp);
+
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datos)
+                    body: formData
                 });
 
                 if (response.ok) {
@@ -1404,10 +1388,8 @@
                     submitBtn.style.cursor = 'not-allowed';
                     submitBtn.disabled = true;
                     
-                    console.log('Confirmación guardada exitosamente');
-                    
-                    // Actualizar resultados después de un breve retraso
-                    setTimeout(actualizarResultados, 2000);
+                    // Actualizar resultados inmediatamente
+                    setTimeout(actualizarResultados, 1000);
                     
                     return true;
                 } else {
@@ -1416,66 +1398,27 @@
                 
             } catch (error) {
                 console.error('Error al enviar datos:', error);
-                
-                // Si falla con CORS, intentar con no-cors
-                try {
-                    await fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(datos)
-                    });
-
-                    // Con no-cors no podemos ver la respuesta, así que asumimos éxito
-                    usuarioYaVoto = true;
-                    localStorage.setItem('yaVoto', 'true');
-                    
-                    // Mostrar mensaje de éxito con detalles
-                    const confirmationText = `Has confirmado para:<br><strong>${fecha.value}</strong><br>Horario: <strong>${horario.value}</strong><br>Personas: <strong>${personas.value}</strong>`;
-                    document.getElementById('confirmationDetails').innerHTML = confirmationText;
-                    document.getElementById('successMessage').style.display = 'block';
-                    
-                    // Deshabilitar botón
-                    const submitBtn = document.getElementById('submitVote');
-                    submitBtn.innerHTML = '<i class="fas fa-check"></i> YA CONFIRMADO';
-                    submitBtn.style.background = 'linear-gradient(45deg, #00aa00, #008800)';
-                    submitBtn.style.cursor = 'not-allowed';
-                    submitBtn.disabled = true;
-                    
-                    console.log('Confirmación enviada (modo no-cors)');
-                    
-                    // Actualizar resultados
-                    setTimeout(actualizarResultados, 2000);
-                    
-                    return true;
-                    
-                } catch (noCorsError) {
-                    console.error('Error incluso con no-cors:', noCorsError);
-                    alert('❌ Error al guardar la confirmación. Intenta de nuevo o verifica tu conexión.');
-                    return false;
-                }
+                alert('❌ Error al guardar la confirmación. Intenta de nuevo.');
+                return false;
             }
         }
 
         // Obtener confirmaciones de Google Sheets
         async function obtenerConfirmaciones() {
             try {
-                const response = await fetch(`${GOOGLE_SCRIPT_URL}?accion=obtener`, {
+                const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=get`, {
                     method: 'GET'
                 });
 
                 if (response.ok) {
                     const datos = await response.json();
-                    console.log('Datos obtenidos:', datos.length, 'registros');
                     return datos;
                 } else {
-                    console.log('Respuesta no OK:', response.status);
+                    console.error('Error al obtener datos:', response.status);
                     return [];
                 }
             } catch (error) {
-                console.error('Error al obtener confirmaciones:', error);
+                console.error('Error de conexión:', error);
                 return [];
             }
         }
@@ -1484,15 +1427,22 @@
         async function actualizarResultados() {
             try {
                 const confirmaciones = await obtenerConfirmaciones();
-                console.log('Actualizando resultados con', confirmaciones.length, 'confirmaciones');
+                
+                // Si no hay datos, mostrar valores por defecto
+                if (!confirmaciones || confirmaciones.length === 0) {
+                    document.getElementById('currentVotesCount').textContent = '0';
+                    document.getElementById('totalConfirmaciones').textContent = '0';
+                    document.getElementById('totalPersonas').textContent = '0';
+                    return;
+                }
                 
                 // Calcular estadísticas
                 const stats = {
                     total: confirmaciones.length,
                     totalPersonas: 0,
                     fechas: { 
-                        febrero: 0, // 28 de Febrero
-                        marzo: 0    // 28 de Marzo
+                        febrero: 0,
+                        marzo: 0
                     },
                     horarios: { tarde: 0, noche: 0 },
                     personas: { 
@@ -1530,8 +1480,6 @@
                     }
                 });
 
-                console.log('Estadísticas calculadas:', stats);
-
                 // Actualizar contadores principales
                 document.getElementById('currentVotesCount').textContent = stats.total;
                 document.getElementById('totalConfirmaciones').textContent = stats.total;
@@ -1539,25 +1487,15 @@
 
                 // Actualizar gráficas de fechas
                 const totalFechas = stats.fechas.febrero + stats.fechas.marzo;
-                const fechas = ['febrero', 'marzo'];
-                const porcentajesFechas = {};
-                
-                if (totalFechas > 0) {
-                    fechas.forEach(fecha => {
-                        porcentajesFechas[fecha] = Math.round((stats.fechas[fecha] / totalFechas) * 100);
-                    });
-                } else {
-                    fechas.forEach(fecha => {
-                        porcentajesFechas[fecha] = 0;
-                    });
-                }
+                const porcentajeFebrero = totalFechas > 0 ? Math.round((stats.fechas.febrero / totalFechas) * 100) : 0;
+                const porcentajeMarzo = totalFechas > 0 ? Math.round((stats.fechas.marzo / totalFechas) * 100) : 0;
 
-                document.getElementById('result_febrero').style.width = `${porcentajesFechas.febrero}%`;
-                document.getElementById('percent_febrero').textContent = `${porcentajesFechas.febrero}%`;
+                document.getElementById('result_febrero').style.width = `${porcentajeFebrero}%`;
+                document.getElementById('percent_febrero').textContent = `${porcentajeFebrero}%`;
                 document.getElementById('count_febrero').textContent = stats.fechas.febrero;
 
-                document.getElementById('result_marzo').style.width = `${porcentajesFechas.marzo}%`;
-                document.getElementById('percent_marzo').textContent = `${porcentajesFechas.marzo}%`;
+                document.getElementById('result_marzo').style.width = `${porcentajeMarzo}%`;
+                document.getElementById('percent_marzo').textContent = `${porcentajeMarzo}%`;
                 document.getElementById('count_marzo').textContent = stats.fechas.marzo;
 
                 // Actualizar gráficas de horarios
@@ -1580,9 +1518,12 @@
                     const porcentaje = totalPersonasConfirmaciones > 0 ? 
                         Math.round((stats.personas[i] / totalPersonasConfirmaciones) * 100) : 0;
                     
-                    document.getElementById(`result_personas_${i}`).style.width = `${porcentaje}%`;
-                    document.getElementById(`percent_personas_${i}`).textContent = `${porcentaje}%`;
-                    document.getElementById(`count_personas_${i}`).textContent = stats.personas[i];
+                    const element = document.getElementById(`result_personas_${i}`);
+                    if (element) {
+                        element.style.width = `${porcentaje}%`;
+                        document.getElementById(`percent_personas_${i}`).textContent = `${porcentaje}%`;
+                        document.getElementById(`count_personas_${i}`).textContent = stats.personas[i];
+                    }
                 }
 
                 // Actualizar lista de últimas confirmaciones
