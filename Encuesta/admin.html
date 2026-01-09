@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel de Control – Fiesta</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #0c0c2e;
+  color: white;
+  padding: 20px;
+}
+
+h1 {
+  color: #ffd700;
+  text-align: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  text-align: left;
+}
+
+th {
+  color: #ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎬 Panel de Control – Fiesta</h1>
+
+<div class="card">
+  <p>Total votos: <strong id="totalVotos">0</strong></p>
+  <p>Total personas: <strong id="totalPersonas">0</strong></p>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Fecha</th>
+        <th>Horario</th>
+        <th>Personas</th>
+      </tr>
+    </thead>
+    <tbody id="tablaVotos"></tbody>
+  </table>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBvzP_3MIQJ7H2QJnPOpYCdWsXeeBHKNXk",
+  authDomain: "encuesta-familiar-3c852.firebaseapp.com",
+  projectId: "encuesta-familiar-3c852",
+  storageBucket: "encuesta-familiar-3c852.firebasestorage.app",
+  messagingSenderId: "847982132954",
+  appId: "1:847982132954:web:03075adefdba31076cefe3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+onSnapshot(collection(db, "votos"), (snapshot) => {
+
+  let totalVotos = snapshot.size;
+  let totalPersonas = 0;
+  let filas = "";
+
+  snapshot.forEach(doc => {
+    const v = doc.data();
+    totalPersonas += v.personas || 0;
+
+    filas += `
+      <tr>
+        <td>${v.nombre || "Anónimo"}</td>
+        <td>${v.fecha}</td>
+        <td>${v.horario}</td>
+        <td>${v.personas}</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("totalVotos").textContent = totalVotos;
+  document.getElementById("totalPersonas").textContent = totalPersonas;
+  document.getElementById("tablaVotos").innerHTML = filas;
+});
+</script>
+
+</body>
+</html>
