@@ -1209,24 +1209,77 @@ async function guardarConfirmacion(e) {
    RESULTADOS EN TIEMPO REAL
 ===================================================== */
 onSnapshot(collection(db, "votos"), (snapshot) => {
-  document.getElementById("currentVotesCount").textContent = snapshot.size;
-  document.getElementById("totalConfirmaciones").textContent = snapshot.size;
-
+  let total = snapshot.size;
   let totalPersonas = 0;
+
+  const fechas = { febrero: 0, marzo: 0 };
+  const horarios = { tarde: 0, noche: 0 };
+  const personas = { 1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0 };
+
   snapshot.forEach(doc => {
-    totalPersonas += doc.data().personas || 0;
+    const v = doc.data();
+
+    // total personas
+    totalPersonas += v.personas || 0;
+
+    // fechas
+    if (v.fecha?.toLowerCase().includes("febrero")) fechas.febrero++;
+    if (v.fecha?.toLowerCase().includes("marzo")) fechas.marzo++;
+
+    // horarios
+    if (v.horario?.toLowerCase().includes("tarde")) horarios.tarde++;
+    if (v.horario?.toLowerCase().includes("noche")) horarios.noche++;
+
+    // personas
+    if (personas[v.personas] !== undefined) {
+      personas[v.personas]++;
+    }
   });
 
+  // Totales generales
+  document.getElementById("currentVotesCount").textContent = total;
+  document.getElementById("totalConfirmaciones").textContent = total;
   document.getElementById("totalPersonas").textContent = totalPersonas;
+
+  // FECHAS
+  const totalFechas = fechas.febrero + fechas.marzo;
+  if (totalFechas > 0) {
+    const pFeb = Math.round((fechas.febrero / totalFechas) * 100);
+    const pMar = Math.round((fechas.marzo / totalFechas) * 100);
+
+    document.getElementById("result_febrero").style.width = pFeb + "%";
+    document.getElementById("percent_febrero").textContent = pFeb + "%";
+    document.getElementById("count_febrero").textContent = fechas.febrero;
+
+    document.getElementById("result_marzo").style.width = pMar + "%";
+    document.getElementById("percent_marzo").textContent = pMar + "%";
+    document.getElementById("count_marzo").textContent = fechas.marzo;
+  }
+
+  // HORARIOS
+  const totalHorarios = horarios.tarde + horarios.noche;
+  if (totalHorarios > 0) {
+    const pT = Math.round((horarios.tarde / totalHorarios) * 100);
+    const pN = Math.round((horarios.noche / totalHorarios) * 100);
+
+    document.getElementById("result_tarde").style.width = pT + "%";
+    document.getElementById("percent_tarde").textContent = pT + "%";
+    document.getElementById("count_tarde").textContent = horarios.tarde;
+
+    document.getElementById("result_noche").style.width = pN + "%";
+    document.getElementById("percent_noche").textContent = pN + "%";
+    document.getElementById("count_noche").textContent = horarios.noche;
+  }
+
+  // PERSONAS
+  for (let i = 1; i <= 8; i++) {
+    const pct = total ? Math.round((personas[i] / total) * 100) : 0;
+    document.getElementById(`result_personas_${i}`).style.width = pct + "%";
+    document.getElementById(`percent_personas_${i}`).textContent = pct + "%";
+    document.getElementById(`count_personas_${i}`).textContent = personas[i];
+  }
 });
 
-/* =====================================================
-   LIMPIAR CACHE (OPCIONAL)
-===================================================== */
-window.limpiarCache = function () {
-  localStorage.removeItem("yaVoto");
-  location.reload();
-};
 </script>
 
 </body>
