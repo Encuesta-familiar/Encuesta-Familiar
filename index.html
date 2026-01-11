@@ -714,6 +714,29 @@
                 margin-right: 10px;
             }
         }
+        
+        .fixed-date {
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .fixed-date-text {
+            font-size: 2rem;
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .fixed-date-description {
+            color: #ccc;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
     </style>
     
     <!-- Font Awesome -->
@@ -778,51 +801,19 @@
 
         <!-- Formulario de Confirmación -->
         <div class="survey-card">
-            <!-- Pregunta 1: Selección de Fecha -->
+            <!-- Pregunta 1: Fecha Fija -->
             <div class="survey-question">
                 <span class="question-number">1</span>
                 <h2 class="question-text">
                     <i class="fas fa-calendar-alt"></i>
-                    Elige la fecha de la fiesta
+                    Fecha de la fiesta
                 </h2>
                 
-                <div class="local-options">
-                    <div class="date-option" data-question="fecha" data-option="febrero">
-                        <input type="radio" id="fecha_febrero" name="fecha" value="28 de Febrero" required>
-                        <label for="fecha_febrero">
-                            <span class="date-number">1</span>
-                            <span class="date-text">28 de Febrero</span>
-                        </label>
-                        <div class="date-description">Celebración de cumpleaños - Fiesta</div>
-                    </div>
-                    
-                    <div class="date-option" data-question="fecha" data-option="marzo7">
-                        <input type="radio" id="fecha_marzo7" name="fecha" value="7 de Marzo" required>
-                        <label for="fecha_marzo7">
-                            <span class="date-number">2</span>
-                            <span class="date-text">7 de Marzo</span>
-                        </label>
-                        <div class="date-description">Celebración de cumpleaños - Fiesta</div>
-                    </div>
-                    
-                    <div class="date-option" data-question="fecha" data-option="marzo14">
-                        <input type="radio" id="fecha_marzo14" name="fecha" value="14 de Marzo" required>
-                        <label for="fecha_marzo14">
-                            <span class="date-number">3</span>
-                            <span class="date-text">14 de Marzo</span>
-                        </label>
-                        <div class="date-description">Celebración de cumpleaños - Fiesta</div>
-                    </div>
-                    
-                    <div class="date-option" data-question="fecha" data-option="marzo21">
-                        <input type="radio" id="fecha_marzo21" name="fecha" value="21 de Marzo" required>
-                        <label for="fecha_marzo21">
-                            <span class="date-number">4</span>
-                            <span class="date-text">21 de Marzo</span>
-                        </label>
-                        <div class="date-description">Celebración de cumpleaños - Fiesta</div>
-                    </div>
+                <div class="fixed-date">
+                    <div class="fixed-date-text">28 de Febrero</div>
+                    <div class="fixed-date-description">Celebración de cumpleaños - Fiesta Hollywood</div>
                 </div>
+                <input type="hidden" id="fecha_febrero" name="fecha" value="28 de Febrero" required>
             </div>
 
             <!-- Pregunta 2: Horario -->
@@ -955,7 +946,6 @@
                     Tu información (opcional)
                 </h2>
                 <input type="text" id="nombre" class="email-input" placeholder="Tu nombre" style="margin-left: 65px;">
-                <input type="email" id="email" class="email-input" placeholder="Tu email (opcional)" style="margin-left: 65px; margin-top: 10px;">
             </div>
 
             <!-- Botón de confirmación -->
@@ -1000,44 +990,16 @@
                 </div>
             </div>
 
-            <!-- Resultado Fechas -->
+            <!-- Información de la fecha fija -->
             <div class="result-item">
                 <div class="result-question">
                     <i class="fas fa-calendar-alt"></i>
-                    1. Preferencia de fecha
+                    1. Fecha de la fiesta
                 </div>
-                
-                <div class="result-bar">
-                    <div class="result-fill" id="result_febrero" style="width: 0%;">
-                        <span class="result-percentage" id="percent_febrero">0%</span>
-                    </div>
+                <div style="background: rgba(255, 215, 0, 0.1); border-radius: 15px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2rem; color: #ffd700; font-weight: bold;">28 de Febrero</div>
+                    <div style="color: #ccc; margin-top: 0.5rem;">Fecha confirmada para la fiesta</div>
                 </div>
-                <div class="result-date">A) 28 de Febrero</div>
-                <div class="result-votes"><span id="count_febrero">0</span> votos</div>
-                
-                <div class="result-bar">
-                    <div class="result-fill" id="result_marzo7" style="width: 0%;">
-                        <span class="result-percentage" id="percent_marzo7">0%</span>
-                    </div>
-                </div>
-                <div class="result-date">B) 7 de Marzo</div>
-                <div class="result-votes"><span id="count_marzo7">0</span> votos</div>
-                
-                <div class="result-bar">
-                    <div class="result-fill" id="result_marzo14" style="width: 0%;">
-                        <span class="result-percentage" id="percent_marzo14">0%</span>
-                    </div>
-                </div>
-                <div class="result-date">C) 14 de Marzo</div>
-                <div class="result-votes"><span id="count_marzo14">0</span> votos</div>
-                
-                <div class="result-bar">
-                    <div class="result-fill" id="result_marzo21" style="width: 0%;">
-                        <span class="result-percentage" id="percent_marzo21">0%</span>
-                    </div>
-                </div>
-                <div class="result-date">D) 21 de Marzo</div>
-                <div class="result-votes"><span id="count_marzo21">0</span> votos</div>
             </div>
 
             <!-- Resultado Horarios -->
@@ -1156,7 +1118,7 @@
         <!-- Footer -->
         <footer class="hollywood-footer">
             <div class="footer-title">FIESTA DE CUMPLEAÑOS HOLLYWOOD</div>
-            <div class="footer-subtitle">Fechas disponibles: 28 Feb, 7 Mar, 14 Mar, 21 Mar</div>
+            <div class="footer-subtitle">Fecha: 28 de Febrero</div>
             <p>Temática: Noche de Hollywood - Elegante y Glamurosa</p>
             <p style="color: #ffd700; margin-top: 1rem; font-size: 1.1rem;">
                 <i class="fas fa-star"></i> ¡Confirma tu asistencia para una noche inolvidable! <i class="fas fa-star"></i>
@@ -1250,13 +1212,11 @@ async function guardarConfirmacion(e) {
     return;
   }
 
-  const fecha = document.querySelector('input[name="fecha"]:checked');
   const horario = document.querySelector('input[name="horario"]:checked');
   const personas = document.querySelector('input[name="personas"]:checked');
   const nombre = document.getElementById("nombre").value || "Anónimo";
-  const email = document.getElementById("email").value || "";
 
-  if (!fecha || !horario || !personas) {
+  if (!horario || !personas) {
     alert("Completa todos los campos.");
     return;
   }
@@ -1264,8 +1224,7 @@ async function guardarConfirmacion(e) {
   try {
     await addDoc(collection(db, "votos"), {
       nombre,
-      email,
-      fecha: fecha.value,
+      fecha: "28 de Febrero",
       horario: horario.value,
       personas: parseInt(personas.value),
       timestamp: serverTimestamp()
@@ -1290,7 +1249,6 @@ onSnapshot(collection(db, "votos"), (snapshot) => {
   let total = snapshot.size;
   let totalPersonas = 0;
 
-  const fechas = { febrero: 0, marzo7: 0, marzo14: 0, marzo21: 0 };
   const horarios = { medio: 0, tarde: 0, noche: 0 };
   const personas = { 1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0 };
 
@@ -1299,12 +1257,6 @@ onSnapshot(collection(db, "votos"), (snapshot) => {
 
     // total personas
     totalPersonas += v.personas || 0;
-
-    // fechas
-    if (v.fecha?.toLowerCase().includes("febrero")) fechas.febrero++;
-    if (v.fecha?.toLowerCase().includes("7 de marzo")) fechas.marzo7++;
-    if (v.fecha?.toLowerCase().includes("14 de marzo")) fechas.marzo14++;
-    if (v.fecha?.toLowerCase().includes("21 de marzo")) fechas.marzo21++;
 
     // horarios
     if (v.horario?.toLowerCase().includes("12:00")) horarios.medio++;
@@ -1321,31 +1273,6 @@ onSnapshot(collection(db, "votos"), (snapshot) => {
   document.getElementById("currentVotesCount").textContent = total;
   document.getElementById("totalConfirmaciones").textContent = total;
   document.getElementById("totalPersonas").textContent = totalPersonas;
-
-  // FECHAS
-  const totalFechas = fechas.febrero + fechas.marzo7 + fechas.marzo14 + fechas.marzo21;
-  if (totalFechas > 0) {
-    const pFeb = Math.round((fechas.febrero / totalFechas) * 100);
-    const pMar7 = Math.round((fechas.marzo7 / totalFechas) * 100);
-    const pMar14 = Math.round((fechas.marzo14 / totalFechas) * 100);
-    const pMar21 = Math.round((fechas.marzo21 / totalFechas) * 100);
-
-    document.getElementById("result_febrero").style.width = pFeb + "%";
-    document.getElementById("percent_febrero").textContent = pFeb + "%";
-    document.getElementById("count_febrero").textContent = fechas.febrero;
-
-    document.getElementById("result_marzo7").style.width = pMar7 + "%";
-    document.getElementById("percent_marzo7").textContent = pMar7 + "%";
-    document.getElementById("count_marzo7").textContent = fechas.marzo7;
-
-    document.getElementById("result_marzo14").style.width = pMar14 + "%";
-    document.getElementById("percent_marzo14").textContent = pMar14 + "%";
-    document.getElementById("count_marzo14").textContent = fechas.marzo14;
-
-    document.getElementById("result_marzo21").style.width = pMar21 + "%";
-    document.getElementById("percent_marzo21").textContent = pMar21 + "%";
-    document.getElementById("count_marzo21").textContent = fechas.marzo21;
-  }
 
   // HORARIOS
   const totalHorarios = horarios.medio + horarios.tarde + horarios.noche;
