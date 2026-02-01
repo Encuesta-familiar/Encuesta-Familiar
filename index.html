@@ -810,10 +810,10 @@
                 </h2>
                 
                 <div class="fixed-date">
-                    <div class="fixed-date-text">28 de Febrero</div>
+                    <div class="fixed-date-text">21 de Marzo</div>
                     <div class="fixed-date-description">Celebración de cumpleaños - Fiesta Hollywood</div>
                 </div>
-                <input type="hidden" id="fecha_febrero" name="fecha" value="28 de Febrero" required>
+                <input type="hidden" id="fecha_febrero" name="fecha" value="21 de Marzo" required>
             </div>
 
             <!-- Pregunta 2: Horario -->
@@ -997,7 +997,7 @@
                     1. Fecha de la fiesta
                 </div>
                 <div style="background: rgba(255, 215, 0, 0.1); border-radius: 15px; padding: 1.5rem; text-align: center;">
-                    <div style="font-size: 2rem; color: #ffd700; font-weight: bold;">28 de Febrero</div>
+                    <div style="font-size: 2rem; color: #ffd700; font-weight: bold;">21 de Marzo</div>
                     <div style="color: #ccc; margin-top: 0.5rem;">Fecha confirmada para la fiesta</div>
                 </div>
             </div>
@@ -1118,7 +1118,7 @@
         <!-- Footer -->
         <footer class="hollywood-footer">
             <div class="footer-title">FIESTA DE CUMPLEAÑOS HOLLYWOOD</div>
-            <div class="footer-subtitle">Fecha: 28 de Febrero</div>
+            <div class="footer-subtitle">Fecha: 21 de Marzo</div>
             <p>Temática: Noche de Hollywood - Elegante y Glamurosa</p>
             <p style="color: #ffd700; margin-top: 1rem; font-size: 1.1rem;">
                 <i class="fas fa-star"></i> ¡Confirma tu asistencia para una noche inolvidable! <i class="fas fa-star"></i>
@@ -1224,7 +1224,7 @@ async function guardarConfirmacion(e) {
   try {
     await addDoc(collection(db, "votos"), {
       nombre,
-      fecha: "28 de Febrero",
+      fecha: "21 de Marzo",
       horario: horario.value,
       personas: parseInt(personas.value),
       timestamp: serverTimestamp()
